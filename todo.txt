@@ -1,0 +1,8 @@
+1. On reset, delete lists and set red/green first to true
+2. On reset, remove dropdown
+3. When populating the lists, give determination of who is winning the trade
+
+Additional features:
+1. New page for rankings of players shown in table:
+    Overall rank, Position rank, Name, Value
+2. Can toggle between table showing ALL, RBs, WRs, TEs, QBs
