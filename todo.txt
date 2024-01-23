@@ -1,8 +1,8 @@
-1. On reset, delete lists and set red/green first to true
-2. On reset, remove dropdown
-3. When populating the lists, give determination of who is winning the trade
+1. Use standard deviation to give more information about the trade 
+    (trade can be fair for both sides instead of one side always winning)
 
 Additional features:
 1. New page for rankings of players shown in table:
     Overall rank, Position rank, Name, Value
 2. Can toggle between table showing ALL, RBs, WRs, TEs, QBs
+3. On trade screen, make players in the trade clickable to remove them?

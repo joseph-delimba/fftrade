@@ -105,3 +105,10 @@ button {
     margin-top: 150px;
     left: 50%;
 }
+
+.result-wrapper {
+    position: absolute;
+    bottom: 25px;
+    width: 100%;
+    text-align: center;
+}

@@ -7,6 +7,10 @@ var redListEl;
 var redFirst = true;
 var greenFirst = true;
 
+//Trade values for each side of the trade
+var redValue = 0;
+var greenValue = 0;
+
 getPlayerData();
 
 let playerNames = [];
@@ -51,6 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
     greenBtn.addEventListener("click", onGreenClick);
     redBtn = document.querySelector("#receive-btn");
     redBtn.addEventListener("click", onRedClick);
+    resetBtn = document.querySelector("#reset-btn");
+    resetBtn.addEventListener("click", onReset);
 });
 
 function createDropdown(list){
@@ -109,6 +115,11 @@ function onGreenClick(e){
     const greenListItem = document.createElement("li");
     greenListItem.innerHTML = playerNames[result];
     greenListEl.appendChild(greenListItem)
+
+    //Add the value of the player added to the trade
+    greenValue += playerValues[result];
+
+    updateResult();
 }
 
 function onRedClick(e){
@@ -136,6 +147,11 @@ function onRedClick(e){
     const redListItem = document.createElement("li");
     redListItem.innerHTML = playerNames[result];
     redListEl.appendChild(redListItem)
+
+    //Add the value of the player added to the trade
+    redValue += playerValues[result];
+
+    updateResult();
 }
 
 function checkInput(inputString){
@@ -150,4 +166,37 @@ function checkInput(inputString){
         index++;
     });
     return result;
+}
+
+function updateResult(){
+    resultEl = document.querySelector("#final-result");
+    if(redValue<greenValue){
+        resultEl.innerHTML = "You should reject the trade offer.";
+        return;
+    }
+    if(greenValue<redValue){
+        resultEl.innerHTML = "You should accept the trade offer!";
+        return;
+    }
+    resultEl.innerHTML = "Invalid trade.";
+}
+
+function onReset(e){
+    e.preventDefault();
+    removeDropdown();
+    const greenList = document.querySelector("#teamgreen-ul");
+    if(greenList){
+        greenList.remove();
+        greenFirst = true;
+    }
+    const redList = document.querySelector("#teamred-ul");
+    if(redList){
+        redList.remove();
+        redFirst = true;
+    }
+    const resultText = document.querySelector("#final-result");
+    if(resultText) resultText.innerHTML = "The current trade is empty.";
+    redValue = 0;
+    greenValue = 0;
+    inputEl.value = '';
 }
