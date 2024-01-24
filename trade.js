@@ -57,6 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
     redBtn.addEventListener("click", onRedClick);
     resetBtn = document.querySelector("#reset-btn");
     resetBtn.addEventListener("click", onReset);
+    // rankingsBtn = document.querySelector("#rankings-btn");
+    // rankingsBtn.addEventListener("click", openRankings);
 });
 
 function createDropdown(list){
@@ -199,4 +201,8 @@ function onReset(e){
     redValue = 0;
     greenValue = 0;
     inputEl.value = '';
+}
+
+function openRankings(){
+    document.getElementById("rankings-div").style.display = "block";
 }

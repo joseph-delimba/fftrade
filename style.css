@@ -46,7 +46,8 @@ button {
     padding: 0.5em;
     position: left;
     float: right;
-    margin-left: 50px;
+    margin-left: 30px;
+    min-width: 86px;
 }
 
 .autocomplete-wrapper {
@@ -108,7 +109,81 @@ button {
 
 .result-wrapper {
     position: absolute;
-    bottom: 25px;
+    bottom: 40px;
     width: 100%;
     text-align: center;
+}
+
+.rankings-div {
+    display: none;
+    position: fixed;
+    top: 50px;
+    left: 25px;
+    width: 85%;
+    height: 85%;
+    z-index: 99;
+    background-color: #aaaaaa;
+    border-radius: 6px;
+}
+
+.rankings-header {
+    text-align: center;
+    margin-top: 15%;
+}
+
+.exit-btn {
+    float: right;
+    background: none;
+    border: none;
+    font-size: 250%;
+}
+
+.exit-btn:hover {
+    color: red;
+}
+
+.rankings-table {
+    background-color: white;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+    border-collapse: separate;
+    border-spacing: 0px;
+    min-width: max-content;
+}
+
+.table-wrapper {
+    max-height: 350px;
+    overflow-y: scroll;
+    margin: 10px;
+}
+
+th {
+    position: sticky;
+    top: 0px;
+    background-color: teal;
+    color: wheat;
+}
+
+th, td {
+    border: 1px solid black;
+    text-align: left;
+}
+
+.rankings-input {
+    margin: 10px;
+    border: unset;
+    padding: 0.5em;
+}
+
+.rankings-btn {
+    border: unset;
+    background: #aaaaaa;
+    padding: 0.5em;
+}
+
+.rankingsbtn-wrapper {
+    position: absolute;
+    bottom: 8px;
 }
