@@ -57,8 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
     redBtn.addEventListener("click", onRedClick);
     resetBtn = document.querySelector("#reset-btn");
     resetBtn.addEventListener("click", onReset);
-    // rankingsBtn = document.querySelector("#rankings-btn");
-    // rankingsBtn.addEventListener("click", openRankings);
+    rankingsBtn = document.querySelector("#rankings-btn");
+    rankingsBtn.addEventListener("click", openRankings);
 });
 
 function createDropdown(list){
