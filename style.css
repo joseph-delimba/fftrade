@@ -154,9 +154,9 @@ button {
 }
 
 .table-wrapper {
-    max-height: 350px;
+    max-height: 275px;
     overflow-y: scroll;
-    margin: 10px;
+    margin: 8px;
 }
 
 th {

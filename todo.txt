@@ -6,3 +6,4 @@ Additional features:
     Overall rank, Position rank, Name, Value
 2. Can toggle between table showing ALL, RBs, WRs, TEs, QBs
 3. On trade screen, make players in the trade clickable to remove them?
+4. Settings menu for full PPR, half PPR, and standard scoring settings (maybe # of teams too)

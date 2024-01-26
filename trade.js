@@ -1,6 +1,8 @@
 var inputEl;
+var rankingsInputEl;
 var greenListEl;
 var redListEl;
+var tableEl;
 
 //On first player, must create a ul AND li
 //Afterwards, only need to add li
@@ -15,6 +17,8 @@ getPlayerData();
 
 let playerNames = [];
 let playerValues = [];
+let ovrRanks = [];
+let posRanks = [];
 
 async function getPlayerData(){
     const dataRes = await fetch("https://api.fantasycalc.com/values/current?isDynasty=false&numQbs=1&numTeams=12&ppr=1");
@@ -26,6 +30,14 @@ async function getPlayerData(){
 
     playerValues = data.map((x) => {
         return x.value;
+    });
+
+    ovrRanks = data.map((x) => {
+        return x.overallRank;
+    });
+
+    posRanks = data.map((x) => {
+        return x.positionRank;
     });
 }
 
@@ -44,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         playerNames.forEach((playerName) => {
             if(result_amount > 4) {return;}
-            if (playerName.substr(0,value.length).toLowerCase() === value){
+            if (playerName.toLowerCase().indexOf(value) > -1){
                 filteredNames.push(playerName);
                 result_amount++;
             }
@@ -59,6 +71,11 @@ document.addEventListener("DOMContentLoaded", () => {
     resetBtn.addEventListener("click", onReset);
     rankingsBtn = document.querySelector("#rankings-btn");
     rankingsBtn.addEventListener("click", openRankings);
+    exitBtn = document.querySelector("#exit-btn");
+    exitBtn.addEventListener("click", onExit);
+    rankingsInputEl = document.querySelector("#rankings-input");
+    rankingsInputEl.addEventListener("input",updateTable);
+    tableEl = document.querySelector("#rankings-table");
 });
 
 function createDropdown(list){
@@ -109,7 +126,7 @@ function onGreenClick(e){
         greenListEl = document.createElement("ul");
         greenListEl.className = "teamgreen-ul";
         greenListEl.id = "teamgreen-ul";
-        document.querySelector("#green-wrapper").appendChild(greenListEl)
+        document.querySelector("#green-wrapper").appendChild(greenListEl);
         greenFirst = false;
     }
 
@@ -141,7 +158,7 @@ function onRedClick(e){
         redListEl = document.createElement("ul");
         redListEl.className = "teamred-ul";
         redListEl.id = "teamred-ul";
-        document.querySelector("#red-wrapper").appendChild(redListEl)
+        document.querySelector("#red-wrapper").appendChild(redListEl);
         redFirst = false;
     }
 
@@ -205,4 +222,47 @@ function onReset(e){
 
 function openRankings(){
     document.getElementById("rankings-div").style.display = "block";
+
+    //Populate the table
+    for(let x = 0; x<playerNames.length; x++){
+        const tableEntry = document.createElement("tr");
+        const ovrEntry = document.createElement("td");
+        ovrEntry.innerHTML = ovrRanks[x];
+        const posEntry = document.createElement("td");
+        posEntry.innerHTML = posRanks[x];
+        const nameEntry = document.createElement("td");
+        nameEntry.innerHTML = playerNames[x];
+        const valueEntry = document.createElement("td");
+        valueEntry.innerHTML = playerValues[x];
+        tableEntry.appendChild(ovrEntry);
+        tableEntry.appendChild(posEntry);
+        tableEntry.appendChild(nameEntry);
+        tableEntry.appendChild(valueEntry);
+        document.querySelector("#rankings-table").appendChild(tableEntry);
+    }
+
+}
+
+function onExit(){
+    document.getElementById("rankings-div").style.display = "none";
+}
+
+function updateTable(){
+    var filter, tr, td;
+    //const input = document.getElementById("#rankings-input");
+    filter = rankingsInputEl.value.toLowerCase();
+    //var tableEl = document.getElementById("#rankings-table");
+    tr = tableEl.getElementsByTagName("tr");
+
+    for(let x=1; x<tr.length; x++){
+        td = tr[x].getElementsByTagName("td")[2];
+        if(td){
+            if(td.innerHTML.toLowerCase().indexOf(filter) > -1){
+                tr[x].style.display = "";
+            }
+            else{
+                tr[x].style.display = "none";
+            }
+        }
+    }
 }
