@@ -4,6 +4,9 @@ var greenListEl;
 var redListEl;
 var tableEl;
 
+//Standard deviation of player values to calculate trade result
+var standardDev;
+
 //On first player, must create a ul AND li
 //Afterwards, only need to add li
 var redFirst = true;
@@ -39,6 +42,8 @@ async function getPlayerData(){
     posRanks = data.map((x) => {
         return x.positionRank;
     });
+
+    getStandardDeviation();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -189,14 +194,29 @@ function checkInput(inputString){
 
 function updateResult(){
     resultEl = document.querySelector("#final-result");
-    if(redValue<greenValue){
-        resultEl.innerHTML = "You should reject the trade offer.";
+    diff = redValue - greenValue;
+
+    if(Math.abs(diff)>(standardDev/2)){
+        if(diff>0){
+            resultEl.innerHTML = "You should accept the trade offer!";
+            return;
+        }
+        if(diff<0){
+            resultEl.innerHTML = "You should reject the trade offer.";
+            return;
+        }
+    }
+
+    if(diff>0){
+        resultEl.innerHTML = "The trade seems fair.<br/>You gain " + diff + " value.";
         return;
     }
-    if(greenValue<redValue){
-        resultEl.innerHTML = "You should accept the trade offer!";
+    if(diff<0){
+        resultEl.innerHTML = "The trade seems fair.<br/>You lose " + Math.abs(diff) + " value.";
         return;
     }
+
+    //Gets here if both sides are the same (impossible in actual trade)
     resultEl.innerHTML = "Invalid trade.";
 }
 
@@ -265,4 +285,18 @@ function updateTable(){
             }
         }
     }
+}
+
+function getStandardDeviation(){
+    let mean = playerValues.reduce((prev,curr) => {
+        return prev + curr;
+    },0) / playerValues.length;
+
+    let newValues = playerValues.map((x) => {
+        return (x - mean)**2
+    });
+
+    let sum = newValues.reduce((prev,curr) => prev + curr,0);
+
+    standardDev = Math.sqrt(sum/playerValues.length);
 }
