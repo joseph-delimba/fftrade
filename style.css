@@ -109,7 +109,7 @@ button {
 
 .result-wrapper {
     position: absolute;
-    bottom: 40px;
+    bottom: 50px;
     width: 100%;
     text-align: center;
 }
@@ -186,4 +186,18 @@ th, td {
 .rankingsbtn-wrapper {
     position: absolute;
     bottom: 8px;
+}
+
+.fantasycalclogo {
+    width: 25%;  
+    position: absolute;
+    bottom: 20px;
+    right: 8px;
+}
+
+.fantasycalclink {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    font-size: 90%;
 }
