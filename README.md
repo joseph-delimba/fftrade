@@ -1,7 +1,7 @@
 # fftrade
 Google extension for analyzing fantasy football trades.
 
-##Instructions
+**Instructions**
 1. Open Google Chrome
 2. Click three dots -> Scroll over Extensions -> Click Manage Extensions
 3. Turn on developer mode at top right
